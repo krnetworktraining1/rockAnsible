@@ -1,0 +1,17 @@
+- hosts: web
+  gather_facts: false
+  tasks:
+  - file:
+      path: /tmp/test
+      state: directory
+  - copy:
+         src: /etc/fstab
+         dest: /tmp/test
+  - service:
+       name: crond
+       state: started
+  - yum:
+         name: 
+           - ftp
+           - vsftpd
+         state: installed 

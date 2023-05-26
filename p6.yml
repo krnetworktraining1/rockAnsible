@@ -1,0 +1,27 @@
+- name: Deploying Webserver
+  hosts:
+   - web
+   - dev
+  user: root 
+  gather_facts: false
+  tasks:
+  - name: create directory /tmp/test
+    file:
+      path: /tmp/test
+      state: directory
+
+  - name: copy  /etc/fstab  into /tmp/test
+    copy:
+         src: /etc/fstab
+         dest: /tmp/test
+  - name: restart service crond
+    service:
+       name: crond
+       state: started
+
+  - name: Install ftp vsftpd
+    yum:
+         name: 
+           - ftp
+           - vsftpd
+         state: installed 
